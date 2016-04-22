@@ -5,32 +5,35 @@ use std::time::Duration;
 use std::thread::sleep;
 use std::process::exit;
 use hyper::Client;
-use hyper::header::Connection;
 
-fn check_host(host: &str, attempt: i8) {
-  if attempt > 5 {
-    println!("Couldn't reach host {} after {} attempts", host, attempt);
-    exit(1);
-  }
+fn check_host(host: &str) {
 
+  let mut attempt = 1;
   let client = Client::new();
 
-  let result = client
-    .get(host)
-    .send();
+  while attempt < 6 {
+    attempt += 1;
 
-  match result {
-    Ok(val) => {
-      println!("Host ok {}", host);
-      exit(0);
+    let result = client
+      .get(host)
+      .send();
+
+    match result {
+      Ok(_) => {
+        println!("Host ok {}", host);
+        exit(0);
+      }
+      Err(e) => {
+        println!("Host not found {} - {}", host, e);
+        let dur = Duration::new(1, 0);
+        sleep(dur);
+      },
     }
-    Err(e) => {
-      println!("Host not found {} - {}", host, e);
-      let dur = Duration::new(1, 0);
-      sleep(dur);
-      check_host(host, attempt + 1);
-    },
   }
+  
+  println!("Couldn't reach host {} after {} attempts", host, attempt);
+  exit(1);
+
 }
 
 fn main() {
@@ -39,10 +42,10 @@ fn main() {
   match args.get(1) {
     Some(host) => {
       println!("Looking for {}", host);
-      check_host(&host, 1);
+      check_host(&host);
     },
     None => {
-      println!("Expected host");
+      println!("Expected host parameter");
       exit(1);
     }
   }
