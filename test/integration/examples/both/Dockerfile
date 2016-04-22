@@ -15,7 +15,7 @@ WORKDIR multirust
 RUN git submodule update --init
 RUN ./build.sh
 RUN ./install.sh
-RUN multirust default 1.8
+RUN multirust default "1.8.0"
 
 RUN which cargo
 
