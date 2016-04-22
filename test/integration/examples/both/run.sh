@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# exit on fail
+set -e
+
 mix deps.get
 
-cd ping && cargo run $APP_HOST:$APP_PORT
-cd ping && cargo run $WEBDRIVER_HOST:$WEBDRIVER_PORT
+cd support/ping && cargo run $APP_HOST:$APP_PORT
+cd support/ping && cargo run $WEBDRIVER_HOST:$WEBDRIVER_PORT
 
 # # Wait for Elm
 # until nc -z $APP_HOST $APP_PORT; do
