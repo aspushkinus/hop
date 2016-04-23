@@ -7,8 +7,6 @@ RUN apt-get update
 RUN apt-get install -y file curl netcat git
 
 # Install RUST
-# RUN curl -sSf https://static.rust-lang.org/rustup.sh | sh
-
 # Install Multirust
 RUN git clone --recursive https://github.com/brson/multirust 
 WORKDIR multirust
