@@ -8,7 +8,7 @@ RUN apt-get install -y \
   file \
   curl \
   netcat \
-  openssl \
+  libssl-dev \
   git
 
 # Install RUST
