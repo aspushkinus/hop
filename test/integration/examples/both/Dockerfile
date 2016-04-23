@@ -4,7 +4,12 @@ ENV UPDATED_ON 2016-04-08
 
 RUN apt-get update
 
-RUN apt-get install -y file curl netcat git
+RUN apt-get install -y \
+  file \
+  curl \
+  netcat \
+  openssl \
+  git
 
 # Install RUST
 # Install Multirust

@@ -5,7 +5,7 @@ set -e
 
 mix deps.get
 
-echo "Ping dependencies"
+echo "====== Ping dependencies ====="
 cd support/ping && cargo build
 cd support/ping && cargo run $APP_HOST:$APP_PORT
 cd support/ping && cargo run $WEBDRIVER_HOST:$WEBDRIVER_PORT
