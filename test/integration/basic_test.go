@@ -14,7 +14,14 @@ var _ = Describe("Basic", func() {
 
 	BeforeEach(func() {
 		var err error
-		page, err = agoutiDriver.NewPage()
+		// page, err = agoutiDriver.NewPage()
+
+		page, err = agouti.NewPage("http://webdriver:4444/wd/hub")
+
+		// Cannot use SauceLabs as it needs to test app in localhost
+		// needs SauceLabs Connect for this which is not supported
+		// page, err = agouti.SauceLabs("firefox", "Linux", "firefox", "33", "sporto", "xxx")
+
 		Expect(err).NotTo(HaveOccurred())
 	})
 

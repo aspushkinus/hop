@@ -11,7 +11,7 @@ example_full:
     - "3000:3000"
 
 webdriver:
-  image: selenium/standalone-chrome
+  image: selenium/hub
   links:
     - example_basic
     - example_full
@@ -26,12 +26,12 @@ test_unit:
   command: ./start_test_unit.sh
 
 test_example_basic:
-  build: ./test/integration/examples/both
+  build: ./test/integration
   links:
     - example_basic
     - webdriver
   volumes:
-    - ./test/integration/examples/both:/usr/src
+    - ./test/integration:/usr/src
   working_dir: /usr/src
   command: ./run.sh
   environment:
@@ -42,12 +42,12 @@ test_example_basic:
     TEST_DIR: basic
 
 test_example_full:
-  build: ./test/integration/examples/both
+  build: ./test/integration
   links:
     - example_full
     - webdriver
   volumes:
-    - ./test/integration/examples/both:/usr/src
+    - ./test/integration:/usr/src
   working_dir: /usr/src
   command: ./run.sh
   environment:
