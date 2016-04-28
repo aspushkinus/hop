@@ -1,11 +1,12 @@
-FROM golang
+FROM nimmis/alpine-golang
 
 ENV UPDATED_ON 2016-04-27
 
-RUN apt-get update
+RUN apk update
 
-RUN apt-get install -y \
-  netcat \
+RUN apk add \
+  bash \
+  netcat-openbsd \
   git
 
 RUN go get github.com/sclevine/agouti
