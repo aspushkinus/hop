@@ -38,6 +38,11 @@ test-full-int-docker:
 	docker-compose ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | grep -v 0 | wc -l | tr -d ' '
 
 ### Other Docker stuff
+stop-containers:
+	docker stop $(docker ps -a -q)
+
+remove-containers:
+	docker rm $(docker ps -a -q)
 
 sh-test-int-basic:
 	docker-compose run test_example_basic /bin/bash
