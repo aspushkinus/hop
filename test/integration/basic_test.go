@@ -14,19 +14,10 @@ var _ = Describe("Basic", func() {
 
 	BeforeEach(func() {
 		var err error
-		// page, err = agoutiDriver.NewPage()
 
 		capabilities := agouti.NewCapabilities().Browser("chrome").Platform("linux").With("javascriptEnabled")
 		page, err = agouti.NewPage("http://webdriver:4444/wd/hub", agouti.Desired(capabilities))
 		Expect(err).NotTo(HaveOccurred())
-
-		// page, err = agouti.NewPage("http://127.0.0.1:4444/wd/hub")
-
-		// Cannot use SauceLabs as it needs to test app in localhost
-		// needs SauceLabs Connect for this which is not supported
-		// page, err = agouti.SauceLabs("firefox", "Linux", "firefox", "33", "sporto", "xxx")
-
-		// Expect(err).NotTo(HaveOccurred())
 	})
 
 	AfterEach(func() {
@@ -35,8 +26,14 @@ var _ = Describe("Basic", func() {
 
 	It("works", func() {
 		Expect(page.Navigate(host + "/Main.elm")).To(Succeed())
-		page.Screenshot("afile.png")
 		Expect(page).To(HaveURL(host + "/Main.elm"))
+
+		title := page.Find(".title")
+		Eventually(title).Should(HaveText("Main"))
+	})
+
+	It("shows main", func() {
+		Expect(page.Navigate(host + "/Main.elm#/")).To(Succeed())
 
 		title := page.Find(".title")
 		Eventually(title).Should(HaveText("Main"))
