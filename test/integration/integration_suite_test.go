@@ -20,11 +20,11 @@ var _ = BeforeSuite(func() {
 
 	// agoutiDriver = agouti.PhantomJS()
 	// agoutiDriver = agouti.Selenium()
-	agoutiDriver = agouti.ChromeDriver()
+	// agoutiDriver = agouti.ChromeDriver()
 
-	Expect(agoutiDriver.Start()).To(Succeed())
+	// Expect(agoutiDriver.Start()).To(Succeed())
 })
 
 var _ = AfterSuite(func() {
-	Expect(agoutiDriver.Stop()).To(Succeed())
+	// Expect(agoutiDriver.Stop()).To(Succeed())
 })

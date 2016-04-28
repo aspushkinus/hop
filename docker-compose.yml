@@ -17,6 +17,8 @@ webdriver:
     - example_full
   ports:
     - "4444:4444"
+  volumes:
+    - /dev/shm:/dev/shm
 
 test_unit:
   image: sporto/elm-node-webpack
